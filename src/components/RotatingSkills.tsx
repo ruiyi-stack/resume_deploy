@@ -30,9 +30,39 @@ export default function RotatingSkills() {
 
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      {/* Rotating container */}
+      {/* Mobile: Static Grid Layout */}
+      <div className="lg:hidden w-full grid grid-cols-2 gap-4 px-4">
+        {skills.map((skill, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            className="w-full"
+          >
+            <motion.div
+              className={`w-full aspect-square bg-gradient-to-br ${skill.color} rounded-2xl flex flex-col items-center justify-center shadow-lg cursor-pointer group relative overflow-hidden transition-all duration-300`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {/* 背景光效 */}
+              <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              
+              {/* 图标 */}
+              <span className="text-4xl mb-2 relative z-10">{skill.icon}</span>
+              
+              {/* 文字 */}
+              <p className="text-xs font-inter font-bold text-gray-700 drop-shadow-sm relative z-10 px-2 text-center leading-tight">
+                {skill.label}
+              </p>
+            </motion.div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Desktop: Rotating container */}
       <motion.div 
-        className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px]"
+        className="hidden lg:block relative w-[400px] h-[400px] xl:w-[500px] xl:h-[500px]"
         style={{ transformOrigin: 'center center' }}
         animate={{ rotate: 360 }}
         transition={{ 
@@ -111,7 +141,7 @@ export default function RotatingSkills() {
               onClick={() => handleClick(index)}
             >
               <motion.div
-                className={`w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] lg:w-[140px] lg:h-[140px] bg-gradient-to-br ${skill.color} rounded-full flex flex-col items-center justify-center shadow-xl cursor-pointer group relative overflow-hidden transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl`}
+                className={`w-[120px] h-[120px] xl:w-[140px] xl:h-[140px] bg-gradient-to-br ${skill.color} rounded-full flex flex-col items-center justify-center shadow-xl cursor-pointer group relative overflow-hidden transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -119,10 +149,10 @@ export default function RotatingSkills() {
                 <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
                 {/* 图标 */}
-                <span className="text-3xl sm:text-4xl lg:text-5xl mb-1 sm:mb-2 relative z-10">{skill.icon}</span>
+                <span className="text-4xl xl:text-5xl mb-2 relative z-10">{skill.icon}</span>
                 
                 {/* 文字 */}
-                <p className="text-[10px] sm:text-xs font-inter font-bold text-gray-700 drop-shadow-sm relative z-10 px-1 sm:px-2 text-center leading-tight">
+                <p className="text-xs font-inter font-bold text-gray-700 drop-shadow-sm relative z-10 px-2 text-center leading-tight">
                   {skill.label}
                 </p>
               </motion.div>

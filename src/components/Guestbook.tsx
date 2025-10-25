@@ -69,6 +69,7 @@ export default function Guestbook() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     const newMessage: Message = {
       id: messages.length + 1,
       name,
@@ -160,7 +161,11 @@ export default function Guestbook() {
       <div className="flex items-center justify-between mb-6 sm:mb-10">
         <h3 className="text-lg sm:text-xl font-inter font-bold text-gray-900">留言板</h3>
         <motion.button
-          onClick={() => setShowForm(!showForm)}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setShowForm(!showForm);
+          }}
           className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-blue-400 text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200"
           whileHover={{ scale: 1.1, rotate: 90 }}
           whileTap={{ scale: 0.9 }}
@@ -217,7 +222,11 @@ export default function Guestbook() {
               <div className="flex gap-2 sm:gap-3">
                 <motion.button
                   type="button"
-                  onClick={() => setShowForm(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setShowForm(false);
+                  }}
                   className="flex-1 px-4 py-2 sm:py-3 bg-gray-100 text-gray-700 rounded-xl font-inter font-medium hover:bg-gray-200 transition-colors duration-200 text-sm sm:text-base"
                   whileTap={{ scale: 0.98 }}
                 >
@@ -225,6 +234,9 @@ export default function Guestbook() {
                 </motion.button>
                 <motion.button
                   type="submit"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
                   className="flex-1 px-4 py-2 sm:py-3 bg-blue-400 text-white rounded-xl font-inter font-medium hover:bg-blue-500 transition-colors duration-200 text-sm sm:text-base"
                   whileTap={{ scale: 0.98 }}
                 >
