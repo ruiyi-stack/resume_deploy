@@ -156,6 +156,7 @@ export default function Guestbook() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.9 }}
       className="w-full"
+      onClick={(e) => e.stopPropagation()}
     >
       {/* Header with Add Button */}
       <div className="flex items-center justify-between mb-6 sm:mb-10">
@@ -183,8 +184,13 @@ export default function Guestbook() {
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
             className="mb-10 overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
           >
-            <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100 space-y-3 sm:space-y-4">
+            <form 
+              onSubmit={handleSubmit} 
+              className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100 space-y-3 sm:space-y-4"
+              onClick={(e) => e.stopPropagation()}
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input
                   type="text"
