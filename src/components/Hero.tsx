@@ -10,7 +10,7 @@ import Guestbook from './Guestbook';
 
 export default function Hero() {
   return (
-    <section id="about" className="min-h-screen flex items-center justify-center pt-16 px-4">
+    <section id="about" className="min-h-screen flex items-center justify-center pt-16 px-4" style={{ scrollMarginTop: '64px' }}>
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
         {/* Left Content */}
         <motion.div
@@ -112,11 +112,13 @@ export default function Hero() {
         >
           <div className="relative w-full h-[500px] sm:h-[600px] lg:h-[800px]">
             {/* 苹果式卡片设计 */}
-            <div className="absolute inset-0 bg-white rounded-2xl shadow-lg border border-gray-200 p-4 sm:p-6 lg:p-10">
+            <div className="absolute inset-0 bg-white rounded-2xl shadow-lg border border-gray-200 p-4 sm:p-6 lg:p-10 overflow-hidden">
               {/* 技能轮转展示 */}
               <div className="h-full flex flex-col items-center space-y-4 sm:space-y-6 lg:space-y-10 pt-2 sm:pt-4">
                 {/* 圆形旋转技能图标 */}
-                <RotatingSkills />
+                <div className="overflow-hidden">
+                  <RotatingSkills />
+                </div>
                 
                 {/* 简洁的成就展示 */}
                 <div className="w-full space-y-3 sm:space-y-6 -mt-4 sm:-mt-8">

@@ -11,7 +11,7 @@ export default function Footer() {
   const [showEmailSelector, setShowEmailSelector] = useState(false);
 
   return (
-    <footer className="bg-gray-50 border-t border-gray-200 py-12 px-4">
+    <footer id="contact" className="bg-gray-50 border-t border-gray-200 py-12 px-4" style={{ scrollMarginTop: '64px' }}>
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

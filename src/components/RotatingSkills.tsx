@@ -24,15 +24,11 @@ export default function RotatingSkills() {
     setTimeout(() => setClickedIndex(null), 600);
   };
 
-  const radius = 140;
-  const centerX = 250;
-  const centerY = 250;
-
   return (
-    <div className="relative w-full h-full flex items-center justify-center">
+    <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
       {/* Rotating container */}
       <motion.div 
-        className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px]"
+        className="relative w-[280px] h-[280px] sm:w-[360px] sm:h-[360px] lg:w-[500px] lg:h-[500px] overflow-hidden"
         style={{ transformOrigin: 'center center' }}
         animate={{ rotate: 360 }}
         transition={{ 
@@ -83,19 +79,23 @@ export default function RotatingSkills() {
 
         {/* Skill items */}
         {skills.map((skill, index) => {
-          // Fixed positions for four quadrants: top, right, bottom, left
-          const angle = (index * 90 - 90);
-          const radian = (angle * Math.PI) / 180;
-          const itemX = centerX + radius * Math.cos(radian);
-          const itemY = centerY + radius * Math.sin(radian);
+          // Fixed positions for four quadrants using percentage
+          // This ensures they stay within bounds
+          const positions = [
+            { left: '50%', top: '10%' },   // Top
+            { left: '75%', top: '50%' },   // Right
+            { left: '50%', top: '90%' },   // Bottom
+            { left: '25%', top: '50%' },    // Left
+          ];
 
           return (
             <motion.div
               key={index}
               className="absolute"
               style={{
-                left: itemX - 70,
-                top: itemY - 70,
+                left: positions[index].left,
+                top: positions[index].top,
+                transform: 'translate(-50%, -50%)',
               }}
               initial={{ scale: 0 }}
               animate={{ 
@@ -111,7 +111,7 @@ export default function RotatingSkills() {
               onClick={() => handleClick(index)}
             >
               <motion.div
-                className={`w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] lg:w-[140px] lg:h-[140px] bg-gradient-to-br ${skill.color} rounded-full flex flex-col items-center justify-center shadow-xl cursor-pointer group relative overflow-hidden transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl`}
+                className={`w-[80px] h-[80px] sm:w-[100px] sm:h-[100px] lg:w-[120px] lg:h-[120px] bg-gradient-to-br ${skill.color} rounded-full flex flex-col items-center justify-center shadow-xl cursor-pointer group relative overflow-hidden transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -119,10 +119,10 @@ export default function RotatingSkills() {
                 <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
                 {/* 图标 */}
-                <span className="text-3xl sm:text-4xl lg:text-5xl mb-1 sm:mb-2 relative z-10">{skill.icon}</span>
+                <span className="text-2xl sm:text-3xl lg:text-4xl mb-0.5 sm:mb-1 relative z-10">{skill.icon}</span>
                 
                 {/* 文字 */}
-                <p className="text-[10px] sm:text-xs font-inter font-bold text-gray-700 drop-shadow-sm relative z-10 px-1 sm:px-2 text-center leading-tight">
+                <p className="text-[9px] sm:text-[10px] lg:text-xs font-inter font-bold text-gray-700 drop-shadow-sm relative z-10 px-1 text-center leading-tight">
                   {skill.label}
                 </p>
               </motion.div>
