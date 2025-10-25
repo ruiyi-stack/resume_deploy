@@ -20,7 +20,7 @@ export default function Section({ id, title, subtitle, children, className = '' 
       exit={{ opacity: 0, y: -80 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
       viewport={{ once: false, margin: "-50px" }}
-      className={`pt-[38px] pb-16 px-4 ${className}`}
+      className={`pt-[38px] pb-8 sm:pb-12 lg:pb-16 px-4 ${className}`}
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
@@ -30,13 +30,13 @@ export default function Section({ id, title, subtitle, children, className = '' 
           exit={{ opacity: 0, x: 50 }}
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: false }}
-          className="text-center mb-10"
+          className="text-center mb-6 sm:mb-8 lg:mb-10"
         >
-          <h2 className="text-4xl md:text-5xl font-inter font-bold text-gray-900 mb-3">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-inter font-bold text-gray-900 mb-2 sm:mb-3">
             {title}
           </h2>
           {subtitle && (
-            <p className="text-xl text-gray-600 font-inter max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg lg:text-xl text-gray-600 font-inter max-w-3xl mx-auto px-4">
               {subtitle}
             </p>
           )}

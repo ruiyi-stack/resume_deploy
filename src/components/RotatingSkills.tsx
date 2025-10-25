@@ -32,7 +32,7 @@ export default function RotatingSkills() {
     <div className="relative w-full h-full flex items-center justify-center">
       {/* Rotating container */}
       <motion.div 
-        className="relative w-[500px] h-[500px]"
+        className="relative w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] lg:w-[500px] lg:h-[500px]"
         style={{ transformOrigin: 'center center' }}
         animate={{ rotate: 360 }}
         transition={{ 
@@ -111,7 +111,7 @@ export default function RotatingSkills() {
               onClick={() => handleClick(index)}
             >
               <motion.div
-                className={`w-[140px] h-[140px] bg-gradient-to-br ${skill.color} rounded-full flex flex-col items-center justify-center shadow-xl cursor-pointer group relative overflow-hidden transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl`}
+                className={`w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] lg:w-[140px] lg:h-[140px] bg-gradient-to-br ${skill.color} rounded-full flex flex-col items-center justify-center shadow-xl cursor-pointer group relative overflow-hidden transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -119,10 +119,10 @@ export default function RotatingSkills() {
                 <div className="absolute inset-0 bg-gradient-to-br from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
                 {/* 图标 */}
-                <span className="text-5xl mb-2 relative z-10">{skill.icon}</span>
+                <span className="text-3xl sm:text-4xl lg:text-5xl mb-1 sm:mb-2 relative z-10">{skill.icon}</span>
                 
                 {/* 文字 */}
-                <p className="text-xs font-inter font-bold text-gray-700 drop-shadow-sm relative z-10 px-2 text-center leading-tight">
+                <p className="text-[10px] sm:text-xs font-inter font-bold text-gray-700 drop-shadow-sm relative z-10 px-1 sm:px-2 text-center leading-tight">
                   {skill.label}
                 </p>
               </motion.div>

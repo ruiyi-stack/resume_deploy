@@ -29,8 +29,8 @@ export default function Home() {
               title: edu.school,
               subtitle: edu.major,
               content: (
-                <div className="space-y-4">
-                  <p className="text-gray-600 font-inter leading-relaxed">
+                <div className="space-y-3 sm:space-y-4">
+                  <p className="text-sm sm:text-base text-gray-600 font-inter leading-relaxed">
                     主修课程涵盖物流管理、数据分析、供应链优化等核心领域，具备扎实的理论基础和专业技能。
                   </p>
                   <div className="flex flex-wrap gap-2">
@@ -60,12 +60,12 @@ export default function Home() {
 
         {/* Awards Section */}
         <Section id="awards" title="获奖经历" subtitle="学术与竞赛成就">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             {profile.awards.map((award, index) => (
               <Card key={index}>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-inter font-bold text-gray-900">
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="flex items-center justify-between gap-2">
+                    <h3 className="text-base sm:text-lg font-inter font-bold text-gray-900">
                       {award.title}
                     </h3>
                     <Badge variant="accent" size="sm">
@@ -123,11 +123,11 @@ export default function Home() {
                 title: exp.title,
                 subtitle: exp.company,
                 content: (
-                  <ul className="space-y-3">
+                  <ul className="space-y-2 sm:space-y-3">
                     {exp.bullets.map((bullet, bulletIndex) => (
                       <li key={bulletIndex} className="flex items-start space-x-2">
-                        <span className="text-blue-500 mt-1 flex-shrink-0 text-sm">▸</span>
-                        <span className="text-gray-600 font-inter leading-relaxed text-sm flex-1">
+                        <span className="text-blue-500 mt-1 flex-shrink-0 text-xs sm:text-sm">▸</span>
+                        <span className="text-gray-600 font-inter leading-relaxed text-xs sm:text-sm flex-1">
                           {bullet}
                         </span>
                       </li>
@@ -148,20 +148,20 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {profile.projects.map((project, index) => (
               <Card key={index}>
-                <div className="space-y-4">
-                  <div className="flex items-start justify-between">
-                    <h3 className="text-xl font-inter font-bold text-gray-900">
+                <div className="space-y-3 sm:space-y-4">
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="text-lg sm:text-xl font-inter font-bold text-gray-900">
                       {project.name}
                     </h3>
                     <Badge variant="purple" size="sm">
                       {project.role}
                     </Badge>
                   </div>
-                  <p className="text-gray-600 font-inter font-medium">
+                  <p className="text-sm sm:text-base text-gray-600 font-inter font-medium">
                     {project.period}
                   </p>
-                  <div className="space-y-3">
-                    <h4 className="text-sm font-inter font-semibold text-gray-700">
+                  <div className="space-y-2 sm:space-y-3">
+                    <h4 className="text-xs sm:text-sm font-inter font-semibold text-gray-700">
                       技术栈：
                     </h4>
                     <div className="flex flex-wrap gap-2">
@@ -171,14 +171,14 @@ export default function Home() {
                         </Badge>
                       ))}
                     </div>
-                    <h4 className="text-sm font-inter font-semibold text-gray-700">
+                    <h4 className="text-xs sm:text-sm font-inter font-semibold text-gray-700">
                       项目亮点：
                     </h4>
-                    <ul className="space-y-2">
+                    <ul className="space-y-1.5 sm:space-y-2">
                       {project.highlights.map((highlight, highlightIndex) => (
                         <li key={highlightIndex} className="flex items-start space-x-2">
-                          <span className="text-purple-500 mt-1">▸</span>
-                          <span className="text-gray-600 font-inter text-sm leading-relaxed">
+                          <span className="text-purple-500 mt-1 text-xs sm:text-sm">▸</span>
+                          <span className="text-gray-600 font-inter text-xs sm:text-sm leading-relaxed">
                             {highlight}
                           </span>
                         </li>
@@ -195,9 +195,9 @@ export default function Home() {
 
         {/* Skills Section */}
         <Section id="skills" title="技能专长" subtitle="技术能力与语言水平">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             <Card>
-              <h3 className="text-lg font-inter font-bold text-gray-900 mb-4">
+              <h3 className="text-base sm:text-lg font-inter font-bold text-gray-900 mb-3 sm:mb-4">
                 语言能力
               </h3>
               <div className="space-y-2">
@@ -210,7 +210,7 @@ export default function Home() {
             </Card>
             
             <Card>
-              <h3 className="text-lg font-inter font-bold text-gray-900 mb-4">
+              <h3 className="text-base sm:text-lg font-inter font-bold text-gray-900 mb-3 sm:mb-4">
                 编程语言
               </h3>
               <div className="space-y-2">
@@ -223,7 +223,7 @@ export default function Home() {
             </Card>
             
             <Card>
-              <h3 className="text-lg font-inter font-bold text-gray-900 mb-4">
+              <h3 className="text-base sm:text-lg font-inter font-bold text-gray-900 mb-3 sm:mb-4">
                 数据可视化
               </h3>
               <div className="space-y-2">

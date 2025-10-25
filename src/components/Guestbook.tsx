@@ -16,6 +16,7 @@ interface Message {
 export default function Guestbook() {
   const [showForm, setShowForm] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [isTouchInteracting, setIsTouchInteracting] = useState(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const resumeTimerRef = useRef<NodeJS.Timeout | null>(null);
   const [messages, setMessages] = useState<Message[]>([
@@ -94,7 +95,7 @@ export default function Guestbook() {
     let animationFrameId: number;
 
     const scroll = () => {
-      if (!isPaused && container) {
+      if (!isPaused && !isTouchInteracting && container) {
         const maxScroll = container.scrollHeight - container.clientHeight;
         
         if (scrollPosition >= maxScroll) {
@@ -125,7 +126,7 @@ export default function Guestbook() {
         cancelAnimationFrame(animationFrameId);
       }
     };
-  }, [isPaused]);
+  }, [isPaused, isTouchInteracting]);
 
   // 自动恢复滚动（在用户停止交互后）
   useEffect(() => {
@@ -156,15 +157,15 @@ export default function Guestbook() {
       className="w-full"
     >
       {/* Header with Add Button */}
-      <div className="flex items-center justify-between mb-10">
-        <h3 className="text-xl font-inter font-bold text-gray-900">留言板</h3>
+      <div className="flex items-center justify-between mb-6 sm:mb-10">
+        <h3 className="text-lg sm:text-xl font-inter font-bold text-gray-900">留言板</h3>
         <motion.button
           onClick={() => setShowForm(!showForm)}
-          className="w-10 h-10 rounded-full bg-blue-400 text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200"
+          className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-blue-400 text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200"
           whileHover={{ scale: 1.1, rotate: 90 }}
           whileTap={{ scale: 0.9 }}
         >
-          {showForm ? <X className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+          {showForm ? <X className="w-4 h-4 sm:w-5 sm:h-5" /> : <Plus className="w-4 h-4 sm:w-5 sm:h-5" />}
         </motion.button>
       </div>
 
@@ -178,8 +179,8 @@ export default function Guestbook() {
             transition={{ duration: 0.3 }}
             className="mb-10 overflow-hidden"
           >
-            <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+            <form onSubmit={handleSubmit} className="bg-white rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-100 space-y-3 sm:space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <input
                   type="text"
                   placeholder="您的姓名"
@@ -211,20 +212,20 @@ export default function Guestbook() {
                 onChange={(e) => setMessage(e.target.value)}
                 required
                 rows={3}
-                className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-blue-400 focus:bg-white focus:outline-none transition-all font-inter text-sm resize-none"
+                className="w-full px-4 py-2 sm:py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-blue-400 focus:bg-white focus:outline-none transition-all font-inter text-sm resize-none"
               />
-              <div className="flex gap-3">
+              <div className="flex gap-2 sm:gap-3">
                 <motion.button
                   type="button"
                   onClick={() => setShowForm(false)}
-                  className="flex-1 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-inter font-medium hover:bg-gray-200 transition-colors duration-200"
+                  className="flex-1 px-4 py-2 sm:py-3 bg-gray-100 text-gray-700 rounded-xl font-inter font-medium hover:bg-gray-200 transition-colors duration-200 text-sm sm:text-base"
                   whileTap={{ scale: 0.98 }}
                 >
                   取消
                 </motion.button>
                 <motion.button
                   type="submit"
-                  className="flex-1 px-4 py-3 bg-blue-400 text-white rounded-xl font-inter font-medium hover:bg-blue-500 transition-colors duration-200"
+                  className="flex-1 px-4 py-2 sm:py-3 bg-blue-400 text-white rounded-xl font-inter font-medium hover:bg-blue-500 transition-colors duration-200 text-sm sm:text-base"
                   whileTap={{ scale: 0.98 }}
                 >
                   发送
@@ -243,38 +244,46 @@ export default function Guestbook() {
         {/* Scrollable container */}
         <div 
           ref={scrollContainerRef}
-          className="relative bg-white rounded-2xl p-5 max-h-[320px] overflow-y-auto custom-scrollbar"
+          className="relative bg-white rounded-2xl p-3 sm:p-5 max-h-[240px] sm:max-h-[320px] overflow-y-auto custom-scrollbar"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onWheel={() => setIsPaused(true)}
+          onTouchStart={() => {
+            setIsPaused(true);
+            setIsTouchInteracting(true);
+          }}
+          onTouchEnd={() => {
+            setIsTouchInteracting(false);
+            setTimeout(() => setIsPaused(false), 3000);
+          }}
         >
-          <div className="space-y-7 pr-2">
+          <div className="space-y-4 sm:space-y-7 pr-2">
             {messages.map((msg, index) => (
               <motion.div
                 key={msg.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="bg-gray-50 rounded-xl p-7 border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all duration-200"
+                className="bg-gray-50 rounded-xl p-4 sm:p-7 border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all duration-200"
               >
-                <div className="flex items-start justify-between mb-5">
-                  <div>
-                    <h4 className="text-sm font-inter font-semibold text-gray-900 mb-3">{msg.name}</h4>
-                    <div className="flex items-center gap-2 text-xs text-gray-500 mb-3">
-                      <Mail className="w-3 h-3" />
-                      <span>{msg.email}</span>
+                <div className="flex items-start justify-between mb-3 sm:mb-5 gap-2">
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-xs sm:text-sm font-inter font-semibold text-gray-900 mb-2 sm:mb-3">{msg.name}</h4>
+                    <div className="flex items-center gap-2 text-[10px] sm:text-xs text-gray-500 mb-2 sm:mb-3">
+                      <Mail className="w-3 h-3 flex-shrink-0" />
+                      <span className="truncate">{msg.email}</span>
                     </div>
-                    <div className="flex items-center gap-2 text-xs text-gray-500">
-                      <Building2 className="w-3 h-3" />
-                      <span>{msg.company}</span>
+                    <div className="flex items-center gap-2 text-[10px] sm:text-xs text-gray-500">
+                      <Building2 className="w-3 h-3 flex-shrink-0" />
+                      <span className="truncate">{msg.company}</span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-1 text-xs text-gray-400 whitespace-nowrap">
+                  <div className="flex items-center gap-1 text-[10px] sm:text-xs text-gray-400 whitespace-nowrap flex-shrink-0">
                     <Calendar className="w-3 h-3" />
                     <span>{msg.date}</span>
                   </div>
                 </div>
-                <p className="text-xs font-inter text-gray-700 leading-relaxed">{msg.message}</p>
+                <p className="text-[10px] sm:text-xs font-inter text-gray-700 leading-relaxed">{msg.message}</p>
               </motion.div>
             ))}
           </div>

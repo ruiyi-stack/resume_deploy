@@ -74,8 +74,8 @@ export const profile = {
   ],
   skills: {
     languages: ["中文","英语（CET-6, IELTS 7.0）"],
-    coding: ["Python（Pandas/NumPy/Scikit-learn）","SQL"],
-    viz: ["Tableau"]
+    coding: ["Python","SQL","Java","JavaScript","C++"],
+    viz: ["Tableau","Power BI"]
   },
   links: {
     pdf: "/resume.pdf", // 部署时把PDF放 public 目录

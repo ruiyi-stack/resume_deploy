@@ -45,7 +45,14 @@ export default function Navbar() {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset;
+      const navbarHeight = 64; // Navbar高度
+      const offset = offsetTop - navbarHeight;
+      
+      window.scrollTo({
+        top: offset,
+        behavior: 'smooth'
+      });
     }
     setIsOpen(false);
   };
@@ -137,7 +144,7 @@ export default function Navbar() {
           height: isOpen ? 'auto' : 0 
         }}
         transition={{ duration: 0.3 }}
-        className="md:hidden bg-dark-800/95 backdrop-blur-md border-t border-primary/20"
+        className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200"
       >
         <div className="px-2 pt-2 pb-3 space-y-1">
           {navItems.map((item) => (
@@ -146,10 +153,10 @@ export default function Navbar() {
               onClick={() => scrollToSection(item.href)}
               className={`block px-3 py-2 text-base font-medium w-full text-left transition-all duration-300 ${
                 activeSection === item.href.substring(1)
-                  ? 'text-primary neon-text'
-                  : 'text-gray-300 hover:text-primary'
+                  ? 'text-gray-900 font-semibold'
+                  : 'text-gray-600 hover:text-gray-900'
               }`}
-              whileHover={{ x: 10 }}
+              whileHover={{ x: 5 }}
             >
               {item.name}
             </motion.button>
@@ -160,8 +167,8 @@ export default function Navbar() {
                 setShowEmailSelector(true);
                 setIsOpen(false);
               }}
-              className="block px-3 py-2 text-base font-medium text-primary hover:text-accent transition-colors duration-300 w-full text-left"
-              whileHover={{ x: 10 }}
+              className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600 transition-colors duration-300 w-full text-left"
+              whileHover={{ x: 5 }}
             >
               <Mail className="w-4 h-4 mr-2 inline" />
               联系我
@@ -169,12 +176,9 @@ export default function Navbar() {
             <motion.a
               href={profile.links.pdf}
               download
-              className="block px-3 py-2 text-base font-medium text-accent hover:text-primary transition-colors duration-300 rounded-lg"
-              whileHover={{ x: 10 }}
-              whileTap={{ 
-                scale: 0.95,
-                boxShadow: "0 0 20px rgba(245, 211, 0, 0.6), 0 0 40px rgba(245, 211, 0, 0.4)"
-              }}
+              className="block px-3 py-2 text-base font-medium text-gray-900 hover:text-blue-600 transition-colors duration-300 rounded-lg"
+              whileHover={{ x: 5 }}
+              whileTap={{ scale: 0.95 }}
             >
               <Download className="w-4 h-4 mr-2 inline" />
               下载PDF

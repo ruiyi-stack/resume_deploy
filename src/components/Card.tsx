@@ -45,8 +45,10 @@ export default function Card({
     >
       {/* Top Right Content */}
       {topRightContent && (
-        <div className="absolute top-4 right-4 z-20">
-          {topRightContent}
+        <div className="absolute top-2 right-2 sm:top-4 sm:right-4 z-20">
+          <div className="scale-75 sm:scale-100 lg:scale-110">
+            {topRightContent}
+          </div>
         </div>
       )}
       

@@ -30,7 +30,7 @@ export default function Timeline({ items, className = '' }: TimelineProps) {
           viewport={{ once: true }}
         >
           <Card topRightContent={item.companyIcon}>
-            <div className="space-y-4 pr-20">
+            <div className="space-y-4 pr-0 sm:pr-12 lg:pr-20">
               {/* 时间标签 */}
               <div className="flex items-center justify-between">
                 <span className="text-sm font-inter text-gray-500 bg-gray-100 px-3 py-1 rounded-full">
