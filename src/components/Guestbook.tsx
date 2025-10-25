@@ -155,11 +155,11 @@ export default function Guestbook() {
       initial={{ y: 20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.8, delay: 0.9 }}
-      className="w-full"
+      className="w-full relative z-30"
       onClick={(e) => e.stopPropagation()}
     >
       {/* Header with Add Button */}
-      <div className="flex items-center justify-between mb-6 sm:mb-10">
+      <div className="flex items-center justify-between mb-6 sm:mb-10 relative z-40">
         <h3 className="text-lg sm:text-xl font-inter font-bold text-gray-900">留言板</h3>
         <motion.button
           onClick={(e) => {
@@ -167,7 +167,7 @@ export default function Guestbook() {
             e.stopPropagation();
             setShowForm(!showForm);
           }}
-          className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-blue-400 text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200"
+          className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-blue-400 text-white flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-200 relative z-50"
           whileHover={{ scale: 1.1, rotate: 90 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -183,7 +183,7 @@ export default function Guestbook() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="mb-10 overflow-hidden"
+            className="mb-10 overflow-hidden relative z-40"
             onClick={(e) => e.stopPropagation()}
           >
             <form 

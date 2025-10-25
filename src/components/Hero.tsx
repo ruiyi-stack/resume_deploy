@@ -11,7 +11,7 @@ import Guestbook from './Guestbook';
 export default function Hero() {
   return (
     <section id="about" className="min-h-screen flex items-center justify-center pt-16 px-4">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start lg:items-center">
         {/* Left Content */}
         <motion.div
           initial={{ x: -100, opacity: 0 }}
@@ -19,7 +19,7 @@ export default function Hero() {
           exit={{ x: -100, opacity: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: false }}
-          className="space-y-6 sm:space-y-8 lg:space-y-12"
+          className="space-y-6 sm:space-y-8 lg:space-y-12 w-full relative z-10"
         >
           {/* Photo & Name */}
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 lg:gap-8">
@@ -108,11 +108,11 @@ export default function Hero() {
           exit={{ x: 100, opacity: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           viewport={{ once: false }}
-          className="relative"
+          className="relative w-full lg:static"
         >
-          <div className="relative w-full h-[500px] sm:h-[600px] lg:h-[800px]">
+          <div className="relative w-full h-[500px] sm:h-[600px] lg:h-[800px] mt-8 lg:mt-0">
             {/* 苹果式卡片设计 */}
-            <div className="absolute inset-0 bg-white rounded-2xl shadow-lg border border-gray-200 p-4 sm:p-6 lg:p-10 overflow-hidden">
+            <div className="absolute inset-0 bg-white rounded-2xl shadow-lg border border-gray-200 p-4 sm:p-6 lg:p-10 overflow-hidden pointer-events-auto relative z-0">
               {/* 技能轮转展示 */}
               <div className="h-full flex flex-col items-center space-y-4 sm:space-y-6 lg:space-y-10 pt-2 sm:pt-4">
                 {/* 圆形旋转技能图标 */}
