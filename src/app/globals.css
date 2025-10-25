@@ -1,0 +1,154 @@
+@import "tailwindcss";
+
+:root {
+  --font-oxanium: 'Oxanium', monospace;
+  --font-rajdhani: 'Rajdhani', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0B0F14;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #00F0FF, #FF3CF7);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #FF3CF7, #00F0FF);
+}
+
+/* 留言板专用滚动条 */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f3f4f6;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* 选择文本样式 */
+::selection {
+  background: rgba(0, 240, 255, 0.3);
+  color: white;
+}
+
+/* 霓虹文字效果 */
+.neon-text {
+  text-shadow: 
+    0 0 5px currentColor,
+    0 0 10px currentColor,
+    0 0 15px currentColor,
+    0 0 20px currentColor;
+}
+
+/* 霓虹边框效果 */
+.neon-border {
+  position: relative;
+  border: 2px solid transparent;
+  background: linear-gradient(45deg, #0B0F14, #0B0F14) padding-box,
+              linear-gradient(45deg, #00F0FF, #FF3CF7, #8B5CF6, #F5D300) border-box;
+  border-radius: 8px;
+}
+
+/* 故障效果 */
+.glitch {
+  position: relative;
+  animation: glitch 0.3s ease-in-out infinite;
+}
+
+@keyframes glitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+}
+
+/* 扫描线效果 */
+.scan-lines::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 240, 255, 0.1) 2px,
+    rgba(0, 240, 255, 0.1) 4px
+  );
+  pointer-events: none;
+  animation: scan 2s linear infinite;
+}
+
+/* 呼吸效果 */
+.breathe {
+  animation: breathe 2s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+/* 悬浮效果 */
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px) rotate(1deg);
+  box-shadow: 0 10px 30px rgba(0, 240, 255, 0.3);
+}
+
+/* 电流流动效果 */
+.current-flow {
+  position: relative;
+  overflow: hidden;
+}
+
+.current-flow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.4), transparent);
+  animation: current 3s linear infinite;
+}
+
+@keyframes current {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* 减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
