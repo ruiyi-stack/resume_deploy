@@ -21,7 +21,6 @@ export default function Section({ id, title, subtitle, children, className = '' 
       transition={{ duration: 0.8, ease: "easeOut" }}
       viewport={{ once: false, margin: "-50px" }}
       className={`pt-[38px] pb-8 sm:pb-12 lg:pb-16 px-4 ${className}`}
-      style={{ scrollMarginTop: '64px' }}
     >
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}

@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { Download, Mail, Menu, X } from 'lucide-react';
 import { profile } from '@/data/cn';
 import EmailSelector from './EmailSelector';
-import Image from 'next/image';
 
 const navItems = [
   { name: '关于', href: '#about' },
@@ -46,10 +45,13 @@ export default function Navbar() {
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      // Use scrollIntoView with scroll-margin-top for accurate positioning
-      element.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'start' 
+      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset;
+      const navbarHeight = 64; // Navbar高度
+      const offset = offsetTop - navbarHeight;
+      
+      window.scrollTo({
+        top: offset,
+        behavior: 'smooth'
       });
     }
     setIsOpen(false);
@@ -67,17 +69,8 @@ export default function Navbar() {
           {/* Logo/Name */}
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="flex-shrink-0 flex items-center gap-3"
+            className="flex-shrink-0"
           >
-            {/* School Logo - Desktop */}
-            <div className="hidden sm:block relative w-10 h-10">
-              <Image
-                src="/tju.jpg"
-                alt="同济大学"
-                fill
-                className="object-contain rounded-lg"
-              />
-            </div>
             <h1 className="text-xl font-inter font-semibold text-gray-900">
               {profile.name}
             </h1>
@@ -154,26 +147,6 @@ export default function Navbar() {
         className="md:hidden bg-white/95 backdrop-blur-md border-t border-gray-200"
       >
         <div className="px-2 pt-2 pb-3 space-y-1">
-          {/* School Logo */}
-          <div className="flex items-center gap-3 px-3 py-3 mb-2 border-b border-gray-200">
-            <div className="relative w-10 h-10 flex-shrink-0">
-              <Image
-                src="/tju.jpg"
-                alt="同济大学"
-                fill
-                className="object-contain rounded-lg"
-              />
-            </div>
-            <div>
-              <p className="text-sm font-inter font-semibold text-gray-900">
-                {profile.education[0].school}
-              </p>
-              <p className="text-xs font-inter text-gray-600">
-                {profile.education[0].major}
-              </p>
-            </div>
-          </div>
-          
           {navItems.map((item) => (
             <motion.button
               key={item.name}
